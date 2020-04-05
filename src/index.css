@@ -1,13 +1,136 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+a {
+  color: darkblue;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+}
+
+
+.button-link {
+  color: darkblue;
+  background-color: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  border: 0;
+  padding: 0;
+}
+
+.button-link:hover {
+  color: red;
+}
+
+nav ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  list-style: none;
+}
+
+nav li {
+  margin: 5px;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.flash {
+  display: flex;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.flash.error {
+  background-color: lightcoral;
+}
+
+.flash-remove {
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  font-size: 2rem;
+}
+
+.flash-remove:hover {
+  background: lightskyblue;
+}
+
+.vertical-form-control {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 10px;
+}
+
+.backpack-dashboard {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 80%;
+}
+
+.backpack-dashboard > * + * {
+  margin-top: 10px;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+.table tr {
+  border-bottom: 1px solid #ccc;
+}
+.table th, .table td {
+  text-align: left;
+  padding: 4px;
+}
+
+.form-add-backpack {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.terminal {
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 5px;
+  background: black;
+  color: greenyellow;
+  padding: 0 10px;
+}
+
+.terminal-remove {
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  color: greenyellow;
+  font-size: 1.5rem;
+  align-self: flex-end;
+}
+
+.terminal-remove:hover {
+  color: lightsalmon;
 }
