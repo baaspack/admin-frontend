@@ -42,6 +42,7 @@ class LoginForm extends Component {
             name="email"
             value={email}
             onChange={this.handleInputChange}
+            autoFocus
           />
         </div>
 

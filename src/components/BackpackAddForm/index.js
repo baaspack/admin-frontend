@@ -40,6 +40,7 @@ class BackpackAddForm extends Component {
             id="name"
             value={name}
             onChange={this.handleInputChange}
+            autoFocus
           />
         </div>
         <div className="vertical-form-control">
