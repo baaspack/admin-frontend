@@ -42,13 +42,13 @@ const apiClientFactory = () => {
       .then(isOk)
   };
 
-  const getWebsocket = () => {
-    const url = `ws://${hostname}`;
+  const getWebsocket = (path = '') => {
+    const url = `ws://${hostname}${path}`;
     let ws = new WebSocket(url);
 
     ws.onopen = () => {
       websocketsRetryCount = 5;
-      console.log('Connected via WS!');
+      console.log(`Connected to ${url} via WS!`);
     };
 
     // ws.onerror = (err) => {
