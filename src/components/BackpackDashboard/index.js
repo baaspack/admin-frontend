@@ -44,7 +44,7 @@ class BackpackDashboard extends Component {
   };
 
   componentWillUnmount() {
-    this.ws.close();
+    this.ws.close(1000, 'page_change');
   };
 
   addBackpack = (backpackName) => {

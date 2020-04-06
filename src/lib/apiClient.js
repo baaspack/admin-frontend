@@ -55,7 +55,12 @@ const apiClientFactory = () => {
     //   console.error('WS error:', err);
     // };
 
-    ws.onclose = () => {
+    ws.onclose = (e) => {
+      if (e.reason === 'page_change') {
+        console.log('closed WS!');
+        return;
+      }
+
       if (websocketsRetryCount > 0) {
         websocketsRetryCount -= 1;
         console.log('WS connection closed! Trying to reconnect...');
