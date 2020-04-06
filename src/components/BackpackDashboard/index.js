@@ -20,9 +20,9 @@ class BackpackDashboard extends Component {
         })
       });
 
-    const ws = apiClient.getWebsocket();
+    this.ws = apiClient.getWebsocket();
 
-    ws.onmessage = (e) => {
+    this.ws.onmessage = (e) => {
       const { stack, message } = JSON.parse(e.data);
 
       this.setState({
@@ -41,6 +41,10 @@ class BackpackDashboard extends Component {
         }
       })
     }
+  };
+
+  componentWillUnmount() {
+    this.ws.close();
   };
 
   addBackpack = (backpackName) => {
