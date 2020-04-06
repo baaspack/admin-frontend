@@ -7,6 +7,7 @@ import Header from '../Header';
 import LoginForm from '../LoginForm';
 import FlashMessage from '../FlashMessage';
 import BackpackDashboard from '../BackpackDashboard';
+import Backpack from '../Backpack';
 
 class App extends Component {
   state = {
@@ -92,6 +93,9 @@ class App extends Component {
         <Switch>
           <Route path="/:formType(login|register)">
             { isLoggedIn ? <Redirect to="/" /> : <LoginForm onSubmit={this.handleLogin} /> }
+          </Route>
+          <Route path="/backpacks/:backpackName">
+            { !isLoggedIn ? <Redirect to="/login" /> : <Backpack handleFlash={this.handleFlash}/> }
           </Route>
           <Route path="/backpacks">
             { !isLoggedIn ? <Redirect to="/login" /> : <BackpackDashboard handleFlash={this.handleFlash}/> }
