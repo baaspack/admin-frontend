@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import BackpackAddForm from './AddForm';
-import { backpackActions } from '../../_actions/';
+import { backpacksActions } from '../../_actions/';
 
 
 class BackpackAddFormToggle extends Component {
@@ -44,7 +44,7 @@ class BackpackAddFormToggle extends Component {
 };
 
 const actionCreators = {
-  add: backpackActions.add,
+  add: backpacksActions.add,
 };
 
 export default connect(null, actionCreators)(BackpackAddFormToggle);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { backpackActions } from '../../_actions/';
+import { backpacksActions } from '../../_actions/';
 
 class BackpackList extends Component {
   componentDidMount() {
@@ -54,8 +54,8 @@ const mapStateToProps = (state) => {
 
 
 const actionCreators = {
-  getAll: backpackActions.getAll,
-  remove: backpackActions.remove,
+  getAll: backpacksActions.getAll,
+  remove: backpacksActions.remove,
 }
 
 export default connect(mapStateToProps, actionCreators)(BackpackList);

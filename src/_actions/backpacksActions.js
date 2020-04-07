@@ -74,7 +74,7 @@ const remove = (backpackId) => {
   }
 };
 
-export const backpackActions = {
+export const backpacksActions = {
   getAll,
   add,
   remove,

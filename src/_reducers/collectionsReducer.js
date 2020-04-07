@@ -19,8 +19,6 @@ export const collectionsReducer = (state = initialState, { type, payload }) => {
         return obj;
       }, {});
 
-      console.log(payload.data, documents);
-
       return {
         ...others,
         [payload.model]: documents,
