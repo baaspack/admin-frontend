@@ -5,11 +5,11 @@ import Property from './Property';
 const blacklist = ['_id', 'createdAt', 'updatedAt', '__v'];
 
 const Document = ({ document }) => {
-  console.log(document);
   const properties = Object.keys(document)
     .filter((key) => key !== '_id')
     .map((key) => (
-      <Property key={key}
+      <Property
+        key={key}
         name={key}
         value={document[key]}
         editable={!blacklist.includes(key)}
@@ -18,8 +18,13 @@ const Document = ({ document }) => {
 
   return (
     <li>{document._id}
-      <ul>
+      <ul className="doc">
         {properties}
+        <li>
+          <button>
+            +
+          </button>
+        </li>
       </ul>
     </li>
   );

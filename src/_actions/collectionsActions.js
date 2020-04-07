@@ -12,6 +12,11 @@ const get = (collectionName) => {
   }
 };
 
+const clearAll = () => {
+  return makeAction(collectionsConstants.CLEAR_ALL);
+};
+
 export const collectionsActions = {
   get,
+  clearAll,
 };

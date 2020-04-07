@@ -134,3 +134,31 @@ code {
 .terminal-remove:hover {
   color: lightsalmon;
 }
+
+.doc .property {
+  display: flex;
+}
+
+.doc .prop-name {
+  font-style: italic;
+  font-size: .85rem;
+  padding-top: .14rem;
+}
+
+.property .remove {
+  display: none;
+  border: none;
+  border-radius: 5px;
+  background-color: inherit;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  margin-left: auto;
+}
+
+.property:hover .remove {
+  display: inline;
+}
+
+.property:hover .remove:hover {
+  background: palevioletred;
+}

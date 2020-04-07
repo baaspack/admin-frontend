@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { backpackActions, wsActions } from '../../_actions';
+import { backpackActions, wsActions, collectionsActions } from '../../_actions';
 
 import Collection from './Collection';
 import Modal from './Modal';
@@ -19,6 +19,11 @@ class Backpack extends Component {
       })
   };
 
+  componentWillUnmount() {
+    const { clearCollections } = this.props;
+    clearCollections();
+  }
+
   render() {
     const { backpack, collections } = this.props;
     const collectionNames = Object.keys(collections);
@@ -30,7 +35,7 @@ class Backpack extends Component {
           {collectionNames
             .map((colName) => (
               <Collection
-                key={colName}
+                key={`${backpack.name}-${colName}`}
                 name={colName}
               />
           ))}
@@ -47,6 +52,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   get: backpackActions.get,
+  clearCollections: collectionsActions.clearAll,
   wsConnect: wsActions.connect,
 };
 
