@@ -1,13 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { flashActions } from '../../_actions';
 
-const FlashMessage = ({ flash, onFlashCloseClick }) => {
-  if (!flash || !flash.message) {
-    return null;
-  }
-
+const FlashMessage = ({ flash, clearFlash }) => {
   const { type, message } = flash;
 
-  console.log(type, message);
+  if (!type) {
+    return null;
+  }
 
   return (
     <div className="flash-messages">
@@ -15,7 +15,7 @@ const FlashMessage = ({ flash, onFlashCloseClick }) => {
         <p className="flash-text">{message.toString()}</p>
         <button
           className="flash-remove"
-          onClick={onFlashCloseClick}
+          onClick={clearFlash}
         >
           &times;
         </button>
@@ -24,4 +24,14 @@ const FlashMessage = ({ flash, onFlashCloseClick }) => {
   )
 };
 
-export default FlashMessage;
+const mapState = (state) => {
+  const { flash } = state;
+
+  return { flash };
+}
+
+const actionCreators = {
+  clearFlash: flashActions.clear,
+};
+
+export default connect(mapState, actionCreators)(FlashMessage);

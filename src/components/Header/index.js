@@ -1,9 +1,17 @@
 import React from 'react';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Header = ({ isLoggedIn, onLogoutClick }) => {
+import { userActions } from '../../_actions'
+
+const Header = ({ isLoggedIn, logout, history }) => {
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        history.push('/');
+      });
+  };
+
   const signInLinks = (
     <ul>
       <li>
@@ -24,7 +32,7 @@ const Header = ({ isLoggedIn, onLogoutClick }) => {
         <button
           className="button-link"
           type="button"
-          onClick={onLogoutClick}
+          onClick={handleLogout}
         >
           Log out
         </button>
@@ -41,4 +49,14 @@ const Header = ({ isLoggedIn, onLogoutClick }) => {
   )
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  const { isLoggedIn } = state.user;
+
+  return { isLoggedIn };
+};
+
+const actionCreators = {
+  logout: userActions.logout,
+};
+
+export default connect(mapStateToProps, actionCreators)(withRouter(Header));

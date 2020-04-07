@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { userActions } from '../../_actions';
 
 class LoginForm extends Component {
   state = {
@@ -17,10 +20,20 @@ class LoginForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { onSubmit, match } = this.props;
+
+    const { history, match, register, login } = this.props;
     const { email, password } = this.state;
 
-    onSubmit(match.params.formType, email, password);
+    const { formType } = match.params;
+
+    const action = formType === 'register' ? register : login;
+    const redirectTo = formType === 'register' ? '/login' : '/backpacks';
+
+    action(email, password)
+      .then(() => {
+        history.push(redirectTo);
+      })
+      .catch(console.log);
   };
 
   render() {
@@ -67,4 +80,9 @@ class LoginForm extends Component {
   };
 };
 
-export default withRouter(LoginForm);
+const actionCreators = {
+  register: userActions.register,
+  login: userActions.login,
+};
+
+export default connect(null, actionCreators)(withRouter(LoginForm));

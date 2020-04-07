@@ -1,45 +1,53 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import apiClient from '../../lib/apiClient';
+import { backpackActions, wsActions } from '../../_actions';
+
+import Collection from './Collection';
+import Modal from './Modal';
 
 class Backpack extends Component {
-  state = {
-    name: '',
-  };
-
   componentDidMount() {
+    const { get, wsConnect } = this.props;
     const { backpackName } = this.props.match.params;
 
-    apiClient.send('GET', `backpacks/${backpackName}`)
-      .then(({ backpack }) => {
-        this.setState({
-          name: backpack.name
-        });
-
-        this.ws = apiClient.getWebsocket(`/backpacks/${backpack.name}`);
+    get(backpackName)
+      .then(() => {
+        // when DNS is working... `/backpacks/${backpack.name}`,
+        wsConnect('ws://localhost:4000');
       })
-      .catch((err) => {
-        this.setState({
-          name: 'Nothing to see here!',
-        });
-      });
-
-  };
-
-  componentWillUnmount() {
-    this.ws.close(1000, 'page_change');
   };
 
   render() {
-    const { name } = this.state;
+    const { backpack, collections } = this.props;
+    const collectionNames = Object.keys(collections);
 
     return (
       <div className="backpack">
-        <h1>{name || 'Loading...'}</h1>
+        <h1>Backpack: {backpack.name || 'Loading...'}</h1>
+        <h2>Collections</h2>
+          {collectionNames
+            .map((colName) => (
+              <Collection
+                key={colName}
+                name={colName}
+              />
+          ))}
       </div>
     );
   }
 };
 
-export default withRouter(Backpack);
+const mapStateToProps = (state) => {
+  const { backpack, collections } = state;
+
+  return { backpack, collections };
+};
+
+const actionCreators = {
+  get: backpackActions.get,
+  wsConnect: wsActions.connect,
+};
+
+export default connect(mapStateToProps, actionCreators)(withRouter(Backpack));

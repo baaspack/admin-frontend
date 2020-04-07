@@ -6,7 +6,7 @@ const isOk = (response) => {
   return response
     .json()
     .then((errObj) => {
-      throw errObj.message;
+      throw errObj;
     });
 };
 
@@ -42,8 +42,8 @@ const apiClientFactory = () => {
       .then(isOk)
   };
 
-  const getWebsocket = (path = '') => {
-    const url = `ws://${hostname}${path}`;
+  const getWebsocket = (path = '', tempOverride, tempUrl) => {
+    const url = tempUrl || tempOverride || `ws://${hostname}${path}`;
     let ws = new WebSocket(url);
 
     ws.onopen = () => {
@@ -64,11 +64,10 @@ const apiClientFactory = () => {
       if (websocketsRetryCount > 0) {
         websocketsRetryCount -= 1;
         console.log('WS connection closed! Trying to reconnect...');
-        setTimeout(getWebsocket, websocketsRetryDelay);
+        setTimeout(() => getWebsocket(null, null, url), websocketsRetryDelay);
       } else {
         console.log('WS server is not responding. Stopping retries');
       }
-
     };
 
     return ws;

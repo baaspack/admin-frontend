@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import BackpackAddForm from '../BackpackAddForm';
+import { connect } from 'react-redux';
+
+import BackpackAddForm from './AddForm';
+import { backpackActions } from '../../_actions/';
+
 
 class BackpackAddFormToggle extends Component {
   state = {
@@ -15,9 +19,9 @@ class BackpackAddFormToggle extends Component {
   };
 
   handleAddSubmit = (backpackName) => {
-    const { onAddSubmit } = this.props;
+    const { add } = this.props;
 
-    onAddSubmit(backpackName)
+    add(backpackName)
       .then((succeeded) => {
         if (succeeded) {
           this.toggleShowForm();
@@ -39,4 +43,8 @@ class BackpackAddFormToggle extends Component {
   }
 };
 
-export default BackpackAddFormToggle;
+const actionCreators = {
+  add: backpackActions.add,
+};
+
+export default connect(null, actionCreators)(BackpackAddFormToggle);

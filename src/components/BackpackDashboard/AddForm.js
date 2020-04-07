@@ -14,10 +14,11 @@ class BackpackAddForm extends Component {
   };
 
   handleSubmit = (e) => {
+    e.preventDefault();
+
     const { name } = this.state;
     const { onAddSubmit } = this.props;
 
-    e.preventDefault();
 
     onAddSubmit(name);
   }
