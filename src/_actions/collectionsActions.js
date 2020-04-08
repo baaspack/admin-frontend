@@ -16,6 +16,19 @@ const clearAll = () => {
   return makeAction(collectionsConstants.CLEAR_ALL);
 };
 
+const addCollection = (model) => {
+  const request = () => makeAction(collectionsConstants.ADD_COLLECTION_REQUEST);
+
+  return (dispatch) => {
+    dispatch(request());
+    dispatch(flashActions.success('Adding endpoints for new collection...'));
+
+    console.log(model);
+    dispatch(wsActions.send({ action: 'post', model: 'collection', data: { model } }));
+  }
+};
+
+
 const addDocument = (model, docData) => {
   const request = () => makeAction(collectionsConstants.ADD_REQUEST);
 
@@ -63,6 +76,7 @@ const deleteDocument = (model, id) => {
 export const collectionsActions = {
   get,
   clearAll,
+  addCollection,
   addDocument,
   updateDocument,
   replaceDocument,

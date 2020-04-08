@@ -17,6 +17,13 @@ export const collectionsReducer = (state = initialState, { type, payload: { mode
       }, {});
 
       return { ...collections, ...state };
+    case collectionsConstants.ADD_COLLECTION_SUCCESS:
+      const newCollectionName = data.name;
+
+      return {
+        ...state,
+        [newCollectionName]: [],
+      };
     case collectionsConstants.CLEAR_ALL:
       return {};
     case collectionsConstants.GET_SUCCESS:

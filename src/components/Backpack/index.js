@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { backpackActions, wsActions, collectionsActions } from '../../_actions';
 
+import AddCollectionForm from './AddCollectionForm';
 import Collection from './Collection';
 import PropertyEditModal from './DocumentEditModal';
 
@@ -41,7 +42,7 @@ class Backpack extends Component {
   };
 
   render() {
-    const { backpack, collections } = this.props;
+    const { backpack, collections, addCollection } = this.props;
     const { showModal, modalCollection, modalDoc } = this.state;
     const collectionNames = Object.keys(collections);
 
@@ -49,14 +50,18 @@ class Backpack extends Component {
       <div className="backpack">
         <h1>Backpack: {backpack.name || 'Loading...'}</h1>
         <h2>Collections</h2>
-          {collectionNames
+        <AddCollectionForm onSubmit={addCollection}/>
+
+        {
+          collectionNames
             .map((colName) => (
               <Collection
                 key={`${backpack.name}-${colName}`}
                 name={colName}
                 onToggleShowModal={this.toggleShowModal}
               />
-          ))}
+          ))
+        }
 
         {
           showModal &&
@@ -80,6 +85,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   get: backpackActions.get,
   clearCollections: collectionsActions.clearAll,
+  addCollection: collectionsActions.addCollection,
   wsConnect: wsActions.connect,
 };
 

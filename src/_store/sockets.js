@@ -69,6 +69,9 @@ const createSocketMiddleware = () => {
 
         store.dispatch(flashActions.error(errorMsg));
         break;
+      case collectionsConstants.ADD_COLLECTION_SUCCESS:
+        store.dispatch(flashActions.success('Created endpoints. Please create a new doc to save.'));
+        break;
       case collectionsConstants.ADD_SUCCESS:
       case collectionsConstants.UPDATE_SUCCESS:
       case collectionsConstants.REPLACE_SUCCESS:

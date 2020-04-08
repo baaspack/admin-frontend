@@ -95,6 +95,7 @@ class DocumentEditModal extends Component {
           </div>
           <div className="modal-body">
             <form
+              action=""
               className="form"
               onSubmit={this.handleSubmit}
             >

@@ -259,11 +259,11 @@ code {
   max-width: 350px
 }
 
-.modal .status.ok {
+.status.ok {
   color: green;
 }
 
-.modal .status.error {
+.status.error {
   color: red;
 }
 
@@ -273,4 +273,25 @@ button.modal.submit {
 
 button.modal.submit[disabled=false]:hover {
   background-color: darkgreen;
+}
+
+.add-collection-form {
+  width: 70%;
+}
+
+.input-add-on {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: flex;
+}
+
+.input-add-on input {
+  border: none;
+  flex: 1;
+  margin: 5px;
+}
+
+.input-add-on button {
+  border-radius: 0;
+  border: none;
 }

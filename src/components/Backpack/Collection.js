@@ -34,7 +34,7 @@ class Collection extends Component {
           type="button"
           onClick={() => onToggleShowModal(name)}
         >
-          Add new document
+          Add document
         </button>
       </div>
     )
