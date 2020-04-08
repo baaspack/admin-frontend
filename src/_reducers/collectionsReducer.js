@@ -1,30 +1,42 @@
 import { collectionsConstants } from '../_constants';
 
+/* Initialized State...
+  {
+    collectionName1: [doc1, doc2],
+    collectionName2: [doc3, doc4]...
+  }
+*/
 const initialState = {}
 
-export const collectionsReducer = (state = initialState, { type, payload }) => {
+export const collectionsReducer = (state = initialState, { type, payload: { model, data } = {} }) => {
   switch (type) {
     case collectionsConstants.GET_ALL:
-      const collections = payload.data.reduce((obj, collectionName) => {
-        obj[collectionName] = {};
+      const collections = data.reduce((obj, collectionName) => {
+        obj[collectionName] = [];
         return obj;
       }, {});
 
       return collections;
     case collectionsConstants.CLEAR_ALL:
       return {};
-    case collectionsConstants.GET:
-      const { [payload.model]: _, ...others } = state;
-
-      const documents = payload.data.reduce((obj, document) => {
-        obj[document._id] = document;
-        return obj;
-      }, {});
+    case collectionsConstants.GET_SUCCESS:
+      const { [model]: _, ...others } = state;
 
       return {
         ...others,
-        [payload.model]: documents,
+        [model]: data,
       }
+    case collectionsConstants.UPDATE_SUCCESS:
+      const updatedDoc = data;
+
+      const collectionDocs = state[model].map((doc) => {
+        return doc._id === updatedDoc._id ? updatedDoc : doc;
+      });
+
+      return {
+        ...state,
+        [model]: collectionDocs,
+      };
     default:
       return state;
   }

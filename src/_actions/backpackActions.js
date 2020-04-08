@@ -7,7 +7,7 @@ import makeAction from './actionHelper';
 const get = (backpackName) => {
   const request = () => makeAction(backpackConstants.GET_REQUEST);
   const success = (backpack) => makeAction(backpackConstants.GET_SUCCESS, { backpack });
-  const failure = () => makeAction(backpackConstants.GET_FAILURE, {});
+  const failure = () => makeAction(backpackConstants.GET_FAILURE);
 
   return (dispatch) => {
     dispatch(request());

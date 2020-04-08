@@ -14,10 +14,11 @@ class Collection extends Component {
   render() {
     const { name, documents } = this.props;
 
-    const documentList = Object.keys(documents).map(( _id ) => (
+    const documentList = documents.map((doc) => (
       <Document
-        key={_id}
-        document={documents[_id]}
+        key={doc._id}
+        collectionName={name}
+        document={doc}
       />
     ));
 

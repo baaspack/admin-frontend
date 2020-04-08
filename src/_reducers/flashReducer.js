@@ -1,5 +1,6 @@
 import { flashConstants } from '../_constants';
 
+
 const initialState = {
   type: null,
   msg: null,

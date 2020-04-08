@@ -1,3 +1,4 @@
+import { collectionsConstants } from '../_constants';
 import { wsActions, flashActions } from '../_actions';
 
 let retriesRemaining = 5;
@@ -67,6 +68,9 @@ const createSocketMiddleware = () => {
         `;
 
         store.dispatch(flashActions.error(errorMsg));
+        break;
+      case collectionsConstants.UPDATE_SUCCESS:
+        store.dispatch(flashActions.success('Saved!'))
         break;
     }
 

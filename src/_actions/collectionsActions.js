@@ -1,5 +1,5 @@
 import { collectionsConstants } from '../_constants';
-import { wsActions } from '.';
+import { wsActions, flashActions } from '.';
 
 import makeAction from './actionHelper';
 
@@ -16,7 +16,19 @@ const clearAll = () => {
   return makeAction(collectionsConstants.CLEAR_ALL);
 };
 
+const updateDocument = (model, docData) => {
+  const request = () => makeAction(collectionsConstants.UPDATE_REQUEST);
+
+  return (dispatch) => {
+    dispatch(request());
+    dispatch(flashActions.success('Saving changes...'));
+
+    dispatch(wsActions.send({ action: 'patch', model, data: docData }));
+  }
+};
+
 export const collectionsActions = {
   get,
   clearAll,
+  updateDocument,
 };
