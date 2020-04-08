@@ -69,8 +69,13 @@ const createSocketMiddleware = () => {
 
         store.dispatch(flashActions.error(errorMsg));
         break;
+      case collectionsConstants.ADD_SUCCESS:
       case collectionsConstants.UPDATE_SUCCESS:
+      case collectionsConstants.REPLACE_SUCCESS:
         store.dispatch(flashActions.success('Saved!'))
+        break;
+      case collectionsConstants.DELETE_SUCCESS:
+        store.dispatch(flashActions.success('Deleted!'))
         break;
     }
 

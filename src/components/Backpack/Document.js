@@ -19,7 +19,9 @@ class Document extends Component {
     updateDoc(collectionName, newDoc);
   };
 
-  handleDocumentDeleteClick = () => {
+  handleDocumentDeleteClick = (e) => {
+    e.stopPropagation();
+
     const { collectionName, deleteDoc, document: { _id },  } = this.props;
 
     deleteDoc(collectionName, _id);
@@ -34,7 +36,7 @@ class Document extends Component {
   }
 
   render() {
-    const { document } = this.props;
+    const { document, onDocClick, collectionName } = this.props;
     const { dangerHover } = this.state;
 
     const properties = Object.keys(document)
@@ -50,7 +52,10 @@ class Document extends Component {
       ));
 
     return (
-      <li className={`doc${dangerHover ? ' danger' : ''}`}>
+      <li
+        className={`doc${dangerHover ? ' danger' : ''}`}
+        onClick={() => onDocClick(collectionName, document)}
+      >
         <div className="doc-header">
           <span>{document._id}</span>
           <button
@@ -67,10 +72,6 @@ class Document extends Component {
         <ul className="properties">
           {properties}
         </ul>
-
-        <button className="add-prop">
-          Add Property
-        </button>
       </li>
     );
   }

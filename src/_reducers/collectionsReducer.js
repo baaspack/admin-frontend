@@ -20,13 +20,20 @@ export const collectionsReducer = (state = initialState, { type, payload: { mode
     case collectionsConstants.CLEAR_ALL:
       return {};
     case collectionsConstants.GET_SUCCESS:
-      const { [model]: _, ...others } = state;
-
       return {
-        ...others,
+        ...state,
         [model]: data,
       }
+    case collectionsConstants.ADD_SUCCESS:
+      const collectionToAddTo = state[model];
+      const addedDoc = data;
+
+      return {
+        ...state,
+        [model]: [ ...collectionToAddTo, addedDoc],
+      }
     case collectionsConstants.UPDATE_SUCCESS:
+    case collectionsConstants.REPLACE_SUCCESS:
       const updatedDoc = data;
 
       const collectionDocs = state[model].map((doc) => {
@@ -37,6 +44,16 @@ export const collectionsReducer = (state = initialState, { type, payload: { mode
         ...state,
         [model]: collectionDocs,
       };
+    case collectionsConstants.DELETE_SUCCESS:
+      const deletedDocId = data._id;
+
+      const remainingDocs = state[model].filter(({ _id }) => _id !== deletedDocId);
+
+      return {
+        ...state,
+        [model]: remainingDocs
+      }
+
     default:
       return state;
   }

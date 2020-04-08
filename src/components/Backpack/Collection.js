@@ -12,13 +12,14 @@ class Collection extends Component {
   }
 
   render() {
-    const { name, documents } = this.props;
+    const { name, documents, onToggleShowModal } = this.props;
 
     const documentList = documents.map((doc) => (
       <Document
         key={doc._id}
         collectionName={name}
         document={doc}
+        onDocClick={onToggleShowModal}
       />
     ));
 
@@ -28,6 +29,13 @@ class Collection extends Component {
         <ul>
           {documentList}
         </ul>
+        <button
+          className="collection-add"
+          type="button"
+          onClick={() => onToggleShowModal(name)}
+        >
+          Add new document
+        </button>
       </div>
     )
   }

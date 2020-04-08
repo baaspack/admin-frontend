@@ -13,8 +13,16 @@ class Property extends Component {
     });
   }
 
+  handleDeleteClick = (e) => {
+    e.stopPropagation();
+
+    const { name, onDeleteClick } = this.props;
+
+    onDeleteClick(name)
+  }
+
   render() {
-    const { name, value, editable, onDeleteClick } = this.props;
+    const { name, value, editable } = this.props;
     const { dangerHover } = this.state;
 
     let displayValue;
@@ -34,7 +42,7 @@ class Property extends Component {
             <button
               type="button"
               className="remove"
-              onClick={() => onDeleteClick(name)}
+              onClick={this.handleDeleteClick}
               onMouseEnter={this.handleDangerHover}
               onMouseLeave={this.handleDangerHover}
             >

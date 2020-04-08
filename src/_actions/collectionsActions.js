@@ -16,6 +16,17 @@ const clearAll = () => {
   return makeAction(collectionsConstants.CLEAR_ALL);
 };
 
+const addDocument = (model, docData) => {
+  const request = () => makeAction(collectionsConstants.ADD_REQUEST);
+
+  return (dispatch) => {
+    dispatch(request());
+    dispatch(flashActions.success('Adding new document...'));
+
+    dispatch(wsActions.send({ action: 'post', model, data: docData }));
+  }
+};
+
 const updateDocument = (model, docData) => {
   const request = () => makeAction(collectionsConstants.UPDATE_REQUEST);
 
@@ -24,6 +35,17 @@ const updateDocument = (model, docData) => {
     dispatch(flashActions.success('Saving changes...'));
 
     dispatch(wsActions.send({ action: 'patch', model, data: docData }));
+  }
+};
+
+const replaceDocument = (model, docData) => {
+  const request = () => makeAction(collectionsConstants.REPLACE_REQUEST);
+
+  return (dispatch) => {
+    dispatch(request());
+    dispatch(flashActions.success('Saving changes...'));
+
+    dispatch(wsActions.send({ action: 'put', model, data: docData }));
   }
 };
 
@@ -41,6 +63,8 @@ const deleteDocument = (model, id) => {
 export const collectionsActions = {
   get,
   clearAll,
+  addDocument,
   updateDocument,
+  replaceDocument,
   deleteDocument,
 };

@@ -5,9 +5,15 @@ import { connect } from 'react-redux';
 import { backpackActions, wsActions, collectionsActions } from '../../_actions';
 
 import Collection from './Collection';
-import Modal from './Modal';
+import PropertyEditModal from './DocumentEditModal';
 
 class Backpack extends Component {
+  state = {
+    showModal: false,
+    modalCollection: null,
+    modalDoc: null,
+  };
+
   componentDidMount() {
     const { get, wsConnect } = this.props;
     const { backpackName } = this.props.match.params;
@@ -24,8 +30,19 @@ class Backpack extends Component {
     clearCollections();
   }
 
+  toggleShowModal = (modalCollection, modalDoc) => {
+    this.setState((prevState) => {
+      return {
+        modalCollection,
+        modalDoc,
+        showModal: !prevState.showModal,
+      }
+    });
+  };
+
   render() {
     const { backpack, collections } = this.props;
+    const { showModal, modalCollection, modalDoc } = this.state;
     const collectionNames = Object.keys(collections);
 
     return (
@@ -37,8 +54,18 @@ class Backpack extends Component {
               <Collection
                 key={`${backpack.name}-${colName}`}
                 name={colName}
+                onToggleShowModal={this.toggleShowModal}
               />
           ))}
+
+        {
+          showModal &&
+          <PropertyEditModal
+            onCloseClick={this.toggleShowModal}
+            collection={modalCollection}
+            document={modalDoc}
+          />
+        }
       </div>
     );
   }
