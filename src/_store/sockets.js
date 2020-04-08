@@ -1,4 +1,4 @@
-import { wsActions } from '../_actions';
+import { wsActions, flashActions } from '../_actions';
 
 let retriesRemaining = 5;
 const msToWaitBeforeRetry = 5000;
@@ -39,14 +39,15 @@ const createSocketMiddleware = () => {
   let socket = null;
 
   return (store) => (next) => (action) => {
+    const { type, payload } = action;
     // eslint-disable-next-line default-case
-    switch (action.type) {
+    switch (type) {
       case 'WS_CONNECT':
         if (socket !== null) {
           socket.close(1000, 'page_change');
         }
 
-        socket = createSocket(store, action.payload.host);
+        socket = createSocket(store, payload.host);
 
         break;
       case 'WS_CONNECTED':
@@ -56,8 +57,16 @@ const createSocketMiddleware = () => {
         socket.close(1000, 'page_change');
         break;
       case 'WS_SEND':
-        console.log(action.payload);
-        socket.send(JSON.stringify(action.payload));
+        socket.send(JSON.stringify(payload));
+        break;
+      case 'WS_FAILURE':
+        const errorMsg = `
+          Collection: ${payload.model}
+          Action: ${payload.data.action}
+          Error: ${payload.data.message}
+        `;
+
+        store.dispatch(flashActions.error(errorMsg));
         break;
     }
 
