@@ -6,12 +6,25 @@ import { collectionsActions } from '../../_actions';
 import Document from './Document';
 
 class Collection extends Component {
+  state = {
+    showCollection: false,
+  };
+
   componentDidMount() {
     const { get, name } = this.props;
     get(name);
   }
 
+  toggleShowCollection = () => {
+    this.setState((prevState) => {
+      return {
+        showCollection: !prevState.showCollection,
+      }
+    })
+  }
+
   render() {
+    const { showCollection } = this.state;
     const { name, documents, onToggleShowModal } = this.props;
 
     const documentList = documents.map((doc) => (
@@ -25,9 +38,14 @@ class Collection extends Component {
 
     return (
       <div className="collection">
-        <h3>{name}</h3>
+        <h3
+          className="toggle-show"
+          onClick={this.toggleShowCollection}
+        >
+          {name} [{showCollection ? '-' : '+'}]
+        </h3>
         <ul>
-          {documentList}
+          {showCollection && documentList}
         </ul>
         <button
           className="collection-add"
