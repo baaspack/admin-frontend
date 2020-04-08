@@ -16,7 +16,7 @@ export const collectionsReducer = (state = initialState, { type, payload: { mode
         return obj;
       }, {});
 
-      return collections;
+      return { ...collections, ...state };
     case collectionsConstants.CLEAR_ALL:
       return {};
     case collectionsConstants.GET_SUCCESS:

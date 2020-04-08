@@ -7,6 +7,10 @@ import Property from './Property';
 const blacklist = ['_id', 'createdAt', 'updatedAt', '__v'];
 
 class Document extends Component {
+  state = {
+    dangerHover: false,
+  };
+
   handlePropertyDeleteClick = (propName) => {
     const { collectionName, updateDoc, document } = this.props;
     const newDoc = { ...document };
@@ -15,9 +19,23 @@ class Document extends Component {
     updateDoc(collectionName, newDoc);
   };
 
+  handleDocumentDeleteClick = () => {
+    const { collectionName, deleteDoc, document: { _id },  } = this.props;
+
+    deleteDoc(collectionName, _id);
+  };
+
+  handleDangerHover = () => {
+    this.setState((prevState) => {
+      return {
+        dangerHover: !prevState.dangerHover,
+      };
+    });
+  }
+
   render() {
-    const {  document } = this.props;
-    console.log(document);
+    const { document } = this.props;
+    const { dangerHover } = this.state;
 
     const properties = Object.keys(document)
       .filter((key) => key !== '_id')
@@ -32,15 +50,27 @@ class Document extends Component {
       ));
 
     return (
-      <li>{document._id}
-        <ul className="doc">
+      <li className={`doc${dangerHover ? ' danger' : ''}`}>
+        <div className="doc-header">
+          <span>{document._id}</span>
+          <button
+            type="button"
+            className="remove"
+            onClick={this.handleDocumentDeleteClick}
+            onMouseEnter={this.handleDangerHover}
+            onMouseLeave={this.handleDangerHover}
+          >
+            &times;
+          </button>
+        </div>
+
+        <ul className="properties">
           {properties}
-          <li>
-            <button>
-              +
-            </button>
-          </li>
         </ul>
+
+        <button className="add-prop">
+          Add Property
+        </button>
       </li>
     );
   }
@@ -48,6 +78,7 @@ class Document extends Component {
 
 const actionCreators = {
   updateDoc: collectionsActions.updateDocument,
+  deleteDoc: collectionsActions.deleteDocument,
 };
 
 export default connect(null, actionCreators)(Document);

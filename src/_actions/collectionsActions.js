@@ -27,8 +27,20 @@ const updateDocument = (model, docData) => {
   }
 };
 
+const deleteDocument = (model, id) => {
+  const request = () => makeAction(collectionsConstants.DELETE_REQUEST);
+
+  return (dispatch) => {
+    dispatch(request());
+    dispatch(flashActions.success('Trying to delete..'));
+
+    dispatch(wsActions.send({ action: 'delete', model, data: { id } }));
+  }
+};
+
 export const collectionsActions = {
   get,
   clearAll,
   updateDocument,
+  deleteDocument,
 };

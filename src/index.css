@@ -135,8 +135,43 @@ code {
   color: lightsalmon;
 }
 
+.collection {
+  width: 70%;
+}
+
+.collection ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.doc {
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.doc + .doc {
+  margin-top: 10px;
+}
+
+.doc-header {
+  border-bottom: 1px solid gray;
+  display: flex;
+  padding: 5px;
+  margin: 0;
+}
+
+.doc .properties {
+  margin: 10px 0;
+}
+
 .doc .property {
   display: flex;
+  padding-left: 10px;
+}
+
+.doc .property.editable:hover {
+  background-color: cadetblue;
+  cursor: pointer;
 }
 
 .doc .prop-name {
@@ -145,8 +180,8 @@ code {
   padding-top: .14rem;
 }
 
-.property .remove {
-  display: none;
+.remove {
+  visibility: hidden;
   border: none;
   border-radius: 5px;
   background-color: inherit;
@@ -155,10 +190,22 @@ code {
   margin-left: auto;
 }
 
-.property:hover .remove {
-  display: inline;
+.doc-header:hover > .remove, .property:hover > .remove {
+  visibility: visible;
 }
 
-.property:hover .remove:hover {
-  background: palevioletred;
+.doc .add-prop {
+  border: none;
+  border-top: 1px solid gray;
+  background-color: inherit;
+  padding: 5px 0;
+  width: 100%;
+}
+
+.doc .add-prop:hover {
+  background-color: cadetblue;
+}
+
+.doc.danger, .doc .property.editable.danger {
+  background-color: palevioletred;
 }
