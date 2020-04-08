@@ -24,7 +24,7 @@ const addCollection = (model) => {
     dispatch(flashActions.success('Adding endpoints for new collection...'));
 
     console.log(model);
-    dispatch(wsActions.send({ action: 'post', model: 'collection', data: { model } }));
+    dispatch(wsActions.send({ action: 'post', model: 'collections', data: { model } }));
   }
 };
 
