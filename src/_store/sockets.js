@@ -1,5 +1,5 @@
-import { collectionsConstants } from '../_constants';
-import { wsActions, flashActions } from '../_actions';
+import { collectionsConstants, backpackUserConstants } from '../_constants';
+import { wsActions, flashActions, backpackUserActions } from '../_actions';
 
 let retriesRemaining = 5;
 const msToWaitBeforeRetry = 5000;
@@ -53,6 +53,7 @@ const createSocketMiddleware = () => {
         break;
       case 'WS_CONNECTED':
         console.log(`Connected to ${socket.url}`);
+        store.dispatch(backpackUserActions.get());
         break;
       case 'WS_DISCONNECT':
         socket.close(1000, 'page_change');
@@ -75,9 +76,11 @@ const createSocketMiddleware = () => {
       case collectionsConstants.ADD_SUCCESS:
       case collectionsConstants.UPDATE_SUCCESS:
       case collectionsConstants.REPLACE_SUCCESS:
+      case backpackUserConstants.ADD_SUCCESS:
         store.dispatch(flashActions.success('Saved!'))
         break;
       case collectionsConstants.DELETE_SUCCESS:
+      case backpackUserConstants.DELETE_SUCCESS:
         store.dispatch(flashActions.success('Deleted!'))
         break;
     }

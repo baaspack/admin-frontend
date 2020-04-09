@@ -197,11 +197,60 @@ code {
   margin-left: auto;
 }
 
-.doc-header:hover > .remove, .property:hover > .remove {
+.add-user-form {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: stretch;
+  align-items: flex-end;
+
+  padding: 10px;
+}
+
+.add-user-form > * {
+  flex: 1;
+}
+
+.add-user-form > * + * {
+  margin-left: 20px;
+}
+
+.horizontal-form-control * {
+  width: 100%;
+}
+
+.add-user-form input,
+.add-user-form button {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.user + .user {
+  margin-top: 10px;
+}
+
+.user button {
+  margin-left: 5px;
+  visibility: hidden;
+}
+
+.doc-header:hover > .remove,
+.property:hover > .remove,
+.user:hover > button {
   visibility: visible;
   background-color: inherit;
 }
 
+.user button.edit:hover {
+  background-color: lavender;
+}
+
+.user button.delete:hover {
+  background-color: lavenderblush;
+}
 
 .doc.danger, .doc .property.editable.danger {
   background-color: palevioletred;

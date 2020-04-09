@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { backpackActions, wsActions, collectionsActions } from '../../_actions';
+import {
+  backpackActions,
+  wsActions,
+  collectionsActions,
+  backpackUserActions,
+} from '../../_actions';
 
 import AddCollectionForm from './AddCollectionForm';
 import Collection from './Collection';
 import PropertyEditModal from './DocumentEditModal';
+import BackpackUsers from './Users';
 
 class Backpack extends Component {
   state = {
@@ -27,8 +33,9 @@ class Backpack extends Component {
   };
 
   componentWillUnmount() {
-    const { clearCollections } = this.props;
+    const { clearCollections, clearUsers } = this.props;
     clearCollections();
+    clearUsers();
   }
 
   toggleShowModal = (modalCollection, modalDoc) => {
@@ -49,6 +56,9 @@ class Backpack extends Component {
     return (
       <div className="backpack">
         <h1>Backpack: {backpack.name || 'Loading...'}</h1>
+
+        <BackpackUsers />
+
         <h2>Collections</h2>
         <AddCollectionForm onSubmit={addCollection}/>
 
@@ -85,6 +95,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   get: backpackActions.get,
   clearCollections: collectionsActions.clearAll,
+  clearUsers: backpackUserActions.clearAll,
   addCollection: collectionsActions.addCollection,
   wsConnect: wsActions.connect,
 };

@@ -6,6 +6,7 @@ import backpack from './backpackReducer';
 import backpacks from './backpacksReducer';
 import terminal from './terminalReducer';
 import collections from './collectionsReducer';
+import backpackUsers from './backpackUserReducer';
 
 
 /*
@@ -51,6 +52,7 @@ const rootReducer = combineReducers({
   terminal,
   backpack,
   collections,
+  backpackUsers,
 })
 
 export default rootReducer;

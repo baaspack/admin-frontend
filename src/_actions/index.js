@@ -5,3 +5,4 @@ export * from './backpacksActions';
 export * from './wsActions';
 export * from './terminalActions';
 export * from './collectionsActions';
+export * from './backpackUserActions';
