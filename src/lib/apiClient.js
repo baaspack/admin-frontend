@@ -11,14 +11,11 @@ const isOk = (response) => {
 };
 
 const apiClientFactory = () => {
-  // const { hostname } = window.location;
-  // const url = `http://admin.${hostname}/${action}`;
-  const hostname = 'localhost:3000';
-  let websocketsRetryCount = 5;
-  const websocketsRetryDelay = 5000;
+  const hostname = window.location.origin;
+  // const hostname = 'admin.localhost';
 
   const send = (method = 'GET', action, body) => {
-    const url = `http://${hostname}/${action}`;
+    const url = `${hostname.replace('admin', 'admin-be')}/${action}`;
 
     const options = {
       method,
@@ -42,40 +39,8 @@ const apiClientFactory = () => {
       .then(isOk)
   };
 
-  const getWebsocket = (path = '', tempOverride, tempUrl) => {
-    const url = tempUrl || tempOverride || `ws://${hostname}${path}`;
-    let ws = new WebSocket(url);
-
-    ws.onopen = () => {
-      websocketsRetryCount = 5;
-      console.log(`Connected to ${url} via WS!`);
-    };
-
-    // ws.onerror = (err) => {
-    //   console.error('WS error:', err);
-    // };
-
-    ws.onclose = (e) => {
-      if (e.reason === 'page_change') {
-        console.log('closed WS!');
-        return;
-      }
-
-      if (websocketsRetryCount > 0) {
-        websocketsRetryCount -= 1;
-        console.log('WS connection closed! Trying to reconnect...');
-        setTimeout(() => getWebsocket(null, null, url), websocketsRetryDelay);
-      } else {
-        console.log('WS server is not responding. Stopping retries');
-      }
-    };
-
-    return ws;
-  };
-
   return {
     send,
-    getWebsocket,
   }
 }
 

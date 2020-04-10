@@ -10,8 +10,9 @@ import { wsActions } from '../../_actions'
 class BackpackDashboard extends Component {
   componentDidMount() {
     const { connect } = this.props;
-
-    connect('ws://localhost:3000');
+    const hostname = window.location.host;
+    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    connect(`${protocol}://${hostname.replace('admin', 'admin-be')}`);
   };
 
   render() {

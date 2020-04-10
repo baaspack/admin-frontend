@@ -30,17 +30,14 @@ const state = {
     }
   },
   backpack: {
-    name: '',
-    collections: {
-      name1: {
-        docId1: doc1,
-        docId2: doc2,
-      },
-      name2: {
-        docId1: doc1,
-        docId2: doc2,
-      }
-    }
+    name: '' --selectedBackpack
+  },
+  collections: {
+    collectionName1: [doc1, doc2],
+    collectionName2: [doc3, doc4]...
+  },
+  users: {
+    [user1, user2, user3]
   }
 }
 */

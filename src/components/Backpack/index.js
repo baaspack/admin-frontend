@@ -27,8 +27,9 @@ class Backpack extends Component {
 
     get(backpackName)
       .then(() => {
-        // when DNS is working... `/backpacks/${backpack.name}`,
-        wsConnect('ws://localhost:4000');
+        const hostname = window.location.host;
+        const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        wsConnect(`${protocol}://${hostname.replace('admin', 'admin-be')}/backpacks/${backpackName}`);
       })
   };
 
