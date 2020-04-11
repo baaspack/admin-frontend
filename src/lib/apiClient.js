@@ -31,8 +31,12 @@ const apiClientFactory = () => {
         body = { data: body };
       }
 
-      options.headers['content-type'] = 'application/json';
-      options.body = JSON.stringify(body);
+      if (body instanceof FormData) {
+        options.body = body;
+      } else {
+        options.headers['content-type'] = 'application/json';
+        options.body = JSON.stringify(body);
+      }
     }
 
     return fetch(url, options)

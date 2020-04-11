@@ -10,6 +10,7 @@ import {
 } from '../../_actions';
 
 import AddCollectionForm from './AddCollectionForm';
+import AddZipForm from './AddZipForm';
 import Collection from './Collection';
 import PropertyEditModal from './DocumentEditModal';
 import BackpackUsers from './Users';
@@ -57,6 +58,8 @@ class Backpack extends Component {
     return (
       <div className="backpack">
         <h1>Backpack: {backpack.name || 'Loading...'}</h1>
+
+        <AddZipForm backpackName={backpack.name} />
 
         <BackpackUsers />
 
