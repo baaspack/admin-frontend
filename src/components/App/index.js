@@ -17,6 +17,13 @@ class App extends Component {
     isLoggedIn();
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      const { clearFlash } = this.props;
+
+      clearFlash();
+    }
+  }
 
   render() {
     const { isLoggedIn, loading } = this.props.user;
