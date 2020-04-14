@@ -1,3 +1,8 @@
+const prettyErrorMessages = {
+  'Failed to fetch': 'There was a problem connecting to the Baaspack system. ' +
+                     'Please try again in a few minutes'
+};
+
 const isOk = (response) => {
   if (response.ok) {
     return response.json();
@@ -5,10 +10,16 @@ const isOk = (response) => {
 
   return response
     .json()
-    .then((errObj) => {
-      throw errObj;
-    });
+    .then(handleError)
 };
+
+const handleError = (errObj) => {
+  // Some errors are internal and should be improved before showing them to the
+  // user.
+  errObj.message = prettyErrorMessages[errObj.message] || errObj.message;
+
+  throw(errObj);
+}
 
 const apiClientFactory = () => {
   const hostname = window.location.origin;
@@ -41,6 +52,8 @@ const apiClientFactory = () => {
 
     return fetch(url, options)
       .then(isOk)
+      // Run all network failures through a handler
+      .catch(handleError);
   };
 
   return {
