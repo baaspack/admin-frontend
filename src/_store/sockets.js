@@ -1,4 +1,8 @@
-import { collectionsConstants, backpackUserConstants } from '../_constants';
+import {
+  collectionsConstants,
+  backpackUserConstants,
+  websocketConstants
+} from '../_constants';
 import { wsActions, flashActions, backpackUserActions } from '../_actions';
 
 let retriesRemaining = 5;
@@ -24,6 +28,8 @@ const createSocket = (store, url) => {
       return;
     }
 
+    store.dispatch(wsActions.connectionLost(retriesRemaining));
+
     if (retriesRemaining > 0) {
       retriesRemaining -= 1;
       console.log('WS Connection closed, trying to reconnect');
@@ -43,7 +49,7 @@ const createSocketMiddleware = () => {
     const { type, payload } = action;
     // eslint-disable-next-line default-case
     switch (type) {
-      case 'WS_CONNECT':
+      case websocketConstants.CONNECT:
         if (socket !== null) {
           socket.close(1000, 'page_change');
         }
@@ -51,17 +57,17 @@ const createSocketMiddleware = () => {
         socket = createSocket(store, payload.host);
 
         break;
-      case 'WS_CONNECTED':
+      case websocketConstants.CONNECTED:
         console.log(`Connected to ${socket.url}`);
         store.dispatch(backpackUserActions.get());
         break;
-      case 'WS_DISCONNECT':
+      case websocketConstants.DISCONNECT:
         socket.close(1000, 'page_change');
         break;
-      case 'WS_SEND':
+      case websocketConstants.SEND:
         socket.send(JSON.stringify(payload));
         break;
-      case 'WS_FAILURE':
+      case websocketConstants.FAILURE:
         const errorMsg = `
           Collection: ${payload.model}
           Action: ${payload.data.action}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,11 +9,12 @@ import {
   backpackUserActions,
 } from '../../_actions';
 
-import AddCollectionForm from './AddCollectionForm';
+import { websocketConstants } from '../../_constants';
+
 import AddZipForm from './AddZipForm';
-import Collection from './Collection';
 import PropertyEditModal from './DocumentEditModal';
 import BackpackUsers from './Users';
+import Collections from './Collections';
 
 class Backpack extends Component {
   state = {
@@ -50,32 +51,25 @@ class Backpack extends Component {
     });
   };
 
-  render() {
-    const { backpack, collections, addCollection } = this.props;
+  ui = () => {
+    const { backpack, websocket } = this.props;
     const { showModal, modalCollection, modalDoc } = this.state;
-    const collectionNames = Object.keys(collections);
+
+    let pageContent;
+
+    if (backpack.name) {
+      if (websocket.status === websocketConstants.CONNECTED_STATUS) {
+        pageContent = this.fullUI();
+      } else {
+        pageContent = this.loadingUI();
+      }
+    } else {
+      pageContent = this.orphanUI();
+    }
 
     return (
-      <div className="backpack">
-        <h1>Backpack: {backpack.name || 'Loading...'}</h1>
-
-        <AddZipForm backpackName={backpack.name} />
-
-        <BackpackUsers />
-
-        <h2>Collections</h2>
-        <AddCollectionForm onSubmit={addCollection}/>
-
-        {
-          collectionNames
-            .map((colName) => (
-              <Collection
-                key={`${backpack.name}-${colName}`}
-                name={colName}
-                onToggleShowModal={this.toggleShowModal}
-              />
-          ))
-        }
+      <Fragment>
+        {pageContent}
 
         {
           showModal &&
@@ -85,22 +79,70 @@ class Backpack extends Component {
             document={modalDoc}
           />
         }
+      </Fragment>
+    )
+  }
+
+  orphanUI = () => {
+    return <h1>Backpack: Loading...</h1>;
+  }
+
+  loadingUI = () => {
+    const { backpack } = this.props;
+
+    return (
+      <Fragment>
+        <h1>Backpack: {backpack.name}</h1>
+        <p>{this.loadingMessage()}</p>
+      </Fragment>
+    )
+  }
+
+  loadingMessage = () => {
+    const { status } = this.props.websocket;
+
+    if (status === websocketConstants.CONNECTING_STATUS) {
+      return 'Loading backpack data...';
+    } else if (status === websocketConstants.RECONNECTING_STATUS) {
+      return 'Connection lost, reconnecting to backpack data...';
+    } else if (status === websocketConstants.CONNECTION_LOST_STATUS) {
+      return "We couldn't connect to the backpack, please refresh the page to try again.";
+    }
+  }
+
+  fullUI = () => {
+    const { backpack } = this.props;
+
+    return (
+      <Fragment>
+        <h1>Backpack: {backpack.name}</h1>
+
+        <AddZipForm backpackName={backpack.name} />
+        <BackpackUsers />
+        <Collections toggleShowModal={this.toggleShowModal} />
+      </Fragment>
+    )
+  }
+
+  render() {
+    return (
+      <div className="backpack">
+        {this.ui()}
       </div>
     );
   }
 };
 
 const mapStateToProps = (state) => {
-  const { backpack, collections } = state;
+  const { backpack, websocket } = state;
 
-  return { backpack, collections };
+  return { backpack, websocket };
 };
 
 const actionCreators = {
   get: backpackActions.get,
   clearCollections: collectionsActions.clearAll,
   clearUsers: backpackUserActions.clearAll,
-  addCollection: collectionsActions.addCollection,
   wsConnect: wsActions.connect,
 };
 

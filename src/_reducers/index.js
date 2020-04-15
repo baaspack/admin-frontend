@@ -7,6 +7,7 @@ import backpacks from './backpacksReducer';
 import terminal from './terminalReducer';
 import collections from './collectionsReducer';
 import backpackUsers from './backpackUserReducer';
+import websocket from './websocketReducer';
 
 
 /*
@@ -50,6 +51,7 @@ const rootReducer = combineReducers({
   backpack,
   collections,
   backpackUsers,
+  websocket,
 })
 
 export default rootReducer;
