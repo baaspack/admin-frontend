@@ -2,12 +2,13 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../_actions'
+import { flashActions, userActions } from '../../_actions'
 
-const Header = ({ isLoggedIn, logout, history }) => {
+const Header = ({ isLoggedIn, logout, persistFlash, history }) => {
   const handleLogout = () => {
     logout()
       .then(() => {
+        persistFlash();
         history.push('/');
       });
   };
@@ -57,6 +58,7 @@ const mapStateToProps = (state) => {
 
 const actionCreators = {
   logout: userActions.logout,
+  persistFlash: flashActions.persist,
 };
 
 export default connect(mapStateToProps, actionCreators)(withRouter(Header));
