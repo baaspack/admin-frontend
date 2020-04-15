@@ -22,6 +22,11 @@ export const userReducer = (state = initialState, { type, payload }) => {
         loading: false,
         isLoggedIn: true,
       }
+    case userConstants.REGISTER_SUCCESS:
+      return {
+        loading: false,
+        isLoggedIn: true,
+      }
     case userConstants.LOGOUT_SUCCESS:
       return {
         loading: false,
