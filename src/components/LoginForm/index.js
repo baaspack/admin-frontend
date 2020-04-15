@@ -27,14 +27,14 @@ class LoginForm extends Component {
     const { formType } = match.params;
 
     const action = formType === 'register' ? register : login;
-    const redirectTo = formType === 'register' ? '/login' : '/backpacks';
 
     action(email, password)
       .then(() => {
-        history.push(redirectTo);
+        this.props.persistFlash();
+        history.push('/backpacks');
       })
       .catch(console.log);
-  };
+  }
 
   render() {
     const { email, password } = this.state;
