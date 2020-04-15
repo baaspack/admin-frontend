@@ -5,3 +5,4 @@ export * from './backpacksConstants';
 export * from './terminalConstants';
 export * from './collectionsConstants';
 export * from './backpackUserConstants';
+export * from './websocketConstants';
