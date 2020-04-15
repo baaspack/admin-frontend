@@ -12,8 +12,13 @@ const clear = (message) => {
   return { type: flashConstants.CLEAR, message };
 };
 
+const persist = () => {
+  return { type: flashConstants.PERSIST };
+}
+
 export const flashActions = {
   success,
   error,
   clear,
+  persist,
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../_actions';
+import { userActions, flashActions } from '../../_actions';
 
 class LoginForm extends Component {
   state = {
@@ -31,6 +31,7 @@ class LoginForm extends Component {
 
     action(email, password)
       .then(() => {
+        this.props.persistFlash();
         history.push(redirectTo);
       })
       .catch(console.log);
@@ -83,6 +84,7 @@ class LoginForm extends Component {
 const actionCreators = {
   register: userActions.register,
   login: userActions.login,
+  persistFlash: flashActions.persist,
 };
 
 export default connect(null, actionCreators)(withRouter(LoginForm));
