@@ -8,6 +8,7 @@ import { flashActions } from '../../_actions';
 class AddZipForm extends Component {
   state = {
     selectedFile: null,
+    displayInstructions: false
   };
 
   handleFileUpload = (e) => {
@@ -30,6 +31,7 @@ class AddZipForm extends Component {
       .send('POST', `uploads/`, formData)
       .then(({ message }) => {
         flashMsg(message)
+        this.setState({ displayInstructions: true });
       })
       .catch(({ message }) => {
         flashErr(`Error: ${message}`);
@@ -37,6 +39,10 @@ class AddZipForm extends Component {
   }
 
   render() {
+    const hostname = window.location.host;
+    const newHostname = hostname.replace('admin', this.props.backpackName);
+    const instructionsUrl = `https://${newHostname}/`;
+
     return (
       <form
         action=""
@@ -56,6 +62,15 @@ class AddZipForm extends Component {
         </div>
 
         <button type="submit">Upload & Host!</button>
+
+        {
+          this.state.displayInstructions &&
+            <p className="upload-instructions">
+              The uploaded content should be live at{' '}
+              <a href={instructionsUrl}>{instructionsUrl}</a>{' '}
+              in about 60 seconds.
+            </p>
+        }
       </form>
     )
   }
