@@ -39,6 +39,8 @@ class AddZipForm extends Component {
   }
 
   render() {
+    const instructionsUrl = `https://${this.props.backpackName}.cpstn.dev/`;
+
     return (
       <form
         action=""
@@ -63,9 +65,8 @@ class AddZipForm extends Component {
           this.state.displayInstructions &&
             <p className="upload-instructions">
               The uploaded content should be live at{' '}
-              <a href={`https://${this.props.backpackName}.cpstn.dev/`}>
-                {`https://${this.props.backpackName}.cpstn.dev/`}
-              </a> in about 60 seconds.
+              <a href={instructionsUrl}>{instructionsUrl}</a>{' '}
+              in about 60 seconds.
             </p>
         }
       </form>
