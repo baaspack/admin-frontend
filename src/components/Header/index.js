@@ -7,7 +7,13 @@ import { flashActions, userActions } from '../../_actions'
 import logo from '../../images/logo.jpg';
 
 function Logo() {
-  return <img src={logo} className='nav-logo' />;
+  return (
+    <div>
+      <a href='/'>
+        <img src={logo} className='nav-logo' alt="Logo depicting a backpack" />
+      </a>
+    </div>
+  );
 }
 
 const Header = ({ isLoggedIn, logout, persistFlash, history }) => {
