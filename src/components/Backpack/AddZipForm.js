@@ -39,7 +39,9 @@ class AddZipForm extends Component {
   }
 
   render() {
-    const instructionsUrl = `https://${hostname.replace('admin', this.props.backpackName)}/`;
+    const hostname = window.location.host;
+    const newHostname = hostname.replace('admin', this.props.backpackName);
+    const instructionsUrl = `https://${newHostname}/`;
 
     return (
       <form
