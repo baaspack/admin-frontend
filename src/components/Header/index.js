@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 
 import { flashActions, userActions } from '../../_actions'
 
+import logo from '../../images/logo.jpg';
+
+function Logo() {
+  return <img src={logo} className='nav-logo' />;
+}
+
 const Header = ({ isLoggedIn, logout, persistFlash, history }) => {
   const handleLogout = () => {
     logout()
@@ -44,6 +50,7 @@ const Header = ({ isLoggedIn, logout, persistFlash, history }) => {
   return (
     <header>
       <nav>
+        <Logo />
         {isLoggedIn ? authedLinks : signInLinks }
       </nav>
     </header>

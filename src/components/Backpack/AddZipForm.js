@@ -61,7 +61,7 @@ class AddZipForm extends Component {
           />
         </div>
 
-        <button type="submit">Upload & Host!</button>
+        <button className='zip-upload' type="submit">Upload & Host!</button>
 
         {
           this.state.displayInstructions &&
