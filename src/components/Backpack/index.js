@@ -12,9 +12,10 @@ import {
 import { websocketConstants } from '../../_constants';
 
 import AddZipForm from './AddZipForm';
-import PropertyEditModal from './DocumentEditModal';
 import BackpackUsers from './Users';
 import Collections from './Collections';
+import DeploymentStatus from './DeploymentStatus';
+import PropertyEditModal from './DocumentEditModal';
 
 class Backpack extends Component {
   state = {
@@ -118,6 +119,7 @@ class Backpack extends Component {
         <h1>Backpack: {backpack.name}</h1>
 
         <AddZipForm backpackName={backpack.name} />
+        <DeploymentStatus />
         <BackpackUsers />
         <Collections toggleShowModal={this.toggleShowModal} />
       </Fragment>

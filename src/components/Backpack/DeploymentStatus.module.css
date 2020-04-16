@@ -1,0 +1,11 @@
+.completedStep {
+  color: green;
+}
+
+.inProgressStep {
+  color: blue;
+}
+
+.incompleteStep {
+  color: black;
+}

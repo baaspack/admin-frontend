@@ -4,6 +4,7 @@ import flash from './flashReducer';
 import user from './userReducer';
 import backpack from './backpackReducer';
 import backpacks from './backpacksReducer';
+import deploy from './deployReducer';
 import terminal from './terminalReducer';
 import collections from './collectionsReducer';
 import backpackUsers from './backpackUserReducer';
@@ -45,12 +46,13 @@ const state = {
 
 const rootReducer = combineReducers({
   flash,
-  user,
-  backpacks,
-  terminal,
   backpack,
-  collections,
+  backpacks,
   backpackUsers,
+  collections,
+  deploy,
+  terminal,
+  user,
   websocket,
 })
 

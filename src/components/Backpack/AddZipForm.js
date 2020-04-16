@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import apiClient from '../../lib/apiClient';
-import { flashActions } from '../../_actions';
-
+import { deployActions, flashActions } from '../../_actions';
 
 class AddZipForm extends Component {
   state = {
@@ -20,11 +19,19 @@ class AddZipForm extends Component {
     e.preventDefault();
 
     const { selectedFile } = this.state;
-    const { backpackName, flashMsg, flashErr } = this.props;
+    const {
+      backpackName,
+      deployFailed,
+      flashMsg,
+      flashErr,
+      uploadStarted
+    } = this.props;
 
     const formData = new FormData();
     formData.append('backpackName', backpackName);
     formData.append('file', selectedFile);
+
+    uploadStarted();
 
     apiClient
       .send('POST', `uploads/`, formData)
@@ -32,6 +39,7 @@ class AddZipForm extends Component {
         flashMsg(message)
       })
       .catch(({ message }) => {
+        deployFailed();
         flashErr(`Error: ${message}`);
       })
   }
@@ -62,8 +70,10 @@ class AddZipForm extends Component {
 };
 
 const actionCreators = {
+  deployFailed: deployActions.failed,
   flashMsg: flashActions.success,
   flashErr: flashActions.error,
+  uploadStarted: deployActions.uploadStarted,
 }
 
 export default connect(null, actionCreators)(AddZipForm);
