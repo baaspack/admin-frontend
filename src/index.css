@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Biryani:wght@900&family=Lato:ital@0;1&display=swap');
+
+/* colors generated using http://chir.ag/projects/name-that-color */
+:root {
+  --color-persian-green: #00ac98;
+  --color-puerto-rico: #4AC1B4;
+  --color-buttercup: #f4a41d;
+  --color-pomegranate: #ee4523;
+  --color-flamingo: #f16132;
+  --color-claret: #7c1541;
+  --font-family-content: Lato, sans-serif;
+  --font-family-header: Biryani, sans-serif;
+  --font-family-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  --color-primary: var(--color-buttercup);
+  --color-success: var(--color-persian-green);
+  --color-danger: var(--color-pomegranate);
+  --color-link: var(--color-claret);
+  --color-link-hover: var(--color-flamingo);
+}
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -8,18 +28,23 @@ html {
 }
 
 body {
-  font-family: sans-serif;
+  font-family: var(--font-family-content);
   max-width: 800px;
   margin: 0 auto;
+  padding-bottom: 40px;
 }
 
-a {
-  color: darkblue;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-header);
+}
+
+a, a:link, a:visited, a:hover, a:active {
+  color: var(--color-link);
   text-decoration: none;
 }
 
 a:hover {
-  color: red;
+  color: var(--color-link-hover);
 }
 
 button {
@@ -31,7 +56,7 @@ button {
 
 button:hover {
   cursor: pointer;
-  background: lightblue;
+  background: var(--color-primary);
 }
 
 button[disabled] {
@@ -39,7 +64,7 @@ button[disabled] {
 }
 
 .button-link {
-  color: darkblue;
+  color: var(--color-link);
   background-color: inherit;
   font-size: 100%;
   font-family: inherit;
@@ -48,7 +73,18 @@ button[disabled] {
 }
 
 .button-link:hover {
-  color: red;
+  color: var(--color-link-hover);
+  background-color: inherit;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
 }
 
 nav ul {
@@ -63,28 +99,34 @@ nav li {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: var(--font-family-code);
 }
 
 .flash {
   display: flex;
+  background-color: var(--color-success);
   border: 1px solid lightgray;
   border-radius: 5px;
   justify-content: space-between;
-  padding: 5px;
+  padding: 5px 15px;
+  margin-bottom: 20px;
 }
 
 .flash.error {
-  background-color: lightcoral;
+  background-color: var(--color-danger);
 }
 
 .flash-remove {
   border: 0;
   font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
 }
 
 .flash-remove:hover {
-  background: lightskyblue;
+  background-color: var(--color-puerto-rico);
 }
 
 .vertical-form-control {
@@ -97,7 +139,6 @@ code {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  width: 80%;
 }
 
 .backpack-dashboard > * + * {
@@ -105,6 +146,7 @@ code {
 }
 
 .table {
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -141,11 +183,12 @@ code {
 }
 
 .terminal-remove:hover {
-  color: lightsalmon;
+  color: var(--color-danger);
 }
 
 .collection {
   width: 70%;
+  margin-bottom: 3em;
 }
 
 .collection ul {
@@ -249,11 +292,11 @@ code {
 }
 
 .user button.delete:hover {
-  background-color: lavenderblush;
+  background-color: var(--color-danger);
 }
 
 .doc.danger, .doc .property.editable.danger {
-  background-color: palevioletred;
+  background-color: var(--color-danger);
 }
 
 .modal-background {
@@ -291,7 +334,7 @@ code {
 }
 
 .modal-close:hover {
-  background: lightcoral;
+  background: var(--color-danger);
 }
 
 .json-of-doc {
@@ -301,19 +344,20 @@ code {
   padding: 5px;
   width: 100%;
   height: 250px;
-  margin: 0 auto;
+  margin: 5px auto 0 auto;
 }
 
 .modal .status {
-  max-width: 350px
+  max-width: 350px;
+  margin: 5px 0 10px 0;
 }
 
 .status.ok {
-  color: green;
+  color: var(--color-success);
 }
 
 .status.error {
-  color: red;
+  color: var(--color-danger);
 }
 
 button.modal.submit {
@@ -326,6 +370,7 @@ button.modal.submit[disabled=false]:hover {
 
 .add-collection-form {
   width: 70%;
+  margin-bottom: 2em;
 }
 
 .input-add-on {
@@ -350,8 +395,20 @@ button.modal.submit[disabled=false]:hover {
 }
 
 .upload-instructions {
-  background: #00ac98;
+  background: var(--color-success);
   padding: 20px;
   border: none;
   border-radius: 5px;
+}
+
+.nav-logo {
+  max-width: 100px;
+}
+
+.zip-upload {
+  margin-top: 15px;
+}
+
+.zip-upload-form, .users {
+  margin-bottom: 4em;
 }
