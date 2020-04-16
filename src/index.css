@@ -348,3 +348,10 @@ button.modal.submit[disabled=false]:hover {
 .toggle-show {
   cursor: pointer;
 }
+
+.upload-instructions {
+  background: #00ac98;
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+}
