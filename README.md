@@ -1,3 +1,3 @@
 # Admin Frontend
 
-An admin panel for admin tasks over a backpack deployment
+Admin panel for backpack deployment.
