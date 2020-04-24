@@ -20,7 +20,7 @@
 
 html {
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 *, *:before, *:after {
@@ -29,7 +29,7 @@ html {
 
 body {
   font-family: var(--font-family-content);
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding-bottom: 40px;
 }
@@ -402,7 +402,7 @@ button.modal.submit[disabled=false]:hover {
 }
 
 .nav-logo {
-  max-width: 100px;
+  max-width: 130px;
 }
 
 .zip-upload {

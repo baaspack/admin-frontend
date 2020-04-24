@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { userActions, flashActions } from '../../_actions';
 
+import styles from './styles.module.css';
+
 class LoginForm extends Component {
   state = {
     email: '',
@@ -43,6 +45,7 @@ class LoginForm extends Component {
 
     return (
       <form
+        className={styles.form}
         method="POST"
         onSubmit={this.handleSubmit}
       >
@@ -69,6 +72,8 @@ class LoginForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
+
+        <div className={styles.separator}></div>
 
         <div className="vertical-form-control">
           <button type="submit">
