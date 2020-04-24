@@ -1,5 +1,5 @@
 const prettyErrorMessages = {
-  'Failed to fetch': 'There was a problem connecting to the Baaspack system. ' +
+  'Failed to fetch': 'There was a problem connecting to Backpack. ' +
                      'Please try again in a few minutes'
 };
 
