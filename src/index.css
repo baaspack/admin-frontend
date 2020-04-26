@@ -127,6 +127,10 @@ code {
   clear: both;
 }
 
+.flash-messages {
+  position: sticky;
+  top: 20px;
+}
 .flash {
   align-items: center;
   display: flex;
@@ -137,9 +141,6 @@ code {
   justify-content: space-between;
   max-width: calc(100vw - 20px);
   padding: 5px 15px;
-  position: fixed;
-  top: 20px;
-  width: 1000px;
   z-index: 3;
 }
 
