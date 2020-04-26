@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { collectionsActions } from '../../_actions';
+import Modal from '../App/Modal';
 
+import styles from './document_editor.module.css'
 
 // TODO: find global way to track property blacklist
 const blacklist = ['_id', 'createdAt', 'updatedAt', '__v'];
@@ -85,51 +87,40 @@ class DocumentEditModal extends Component {
     const isNew = !this.props.document;
 
     return (
-      <div className="modal-background">
-        <div className="modal">
-          <div className="modal-header">
-            <h1>{isNew ? 'Creating' : 'Editing'} {collection}</h1>
-            <button className="modal-close" onClick={onCloseClick}>
-              &times;
-            </button>
+      <Modal title={`${isNew ? 'Creating' : 'Editing'} ${collection}`} onClose={onCloseClick}>
+        <form
+          action=""
+          onSubmit={this.handleSubmit}
+        >
+
+          <small>Please enter a valid JSON representation of your document.</small>
+
+          <textarea
+            className="json-of-doc"
+            name="json-doc"
+            id="json-doc"
+            cols="30"
+            rows="10"
+            value={document}
+            onChange={this.handleChange}
+            autoFocus
+          >
+          </textarea>
+
+          <div className={`${styles.status} ${error ? styles.statusError : styles.statusOk}`}>
+            {error ? error : (document && 'All good!')}
           </div>
-          <div className="modal-body">
-            <form
-              action=""
-              className="form"
-              onSubmit={this.handleSubmit}
-            >
 
-              <small>Please enter a valid JSON representation of your document.</small>
+          <button
+            type="submit"
+            disabled={!!error}
+            className={styles.submit}
+          >
+            {isNew ? 'Add' : 'Update'}
+          </button>
 
-              <textarea
-                className="json-of-doc"
-                name="json-doc"
-                id="json-doc"
-                cols="30"
-                rows="10"
-                value={document}
-                onChange={this.handleChange}
-                autoFocus
-              >
-              </textarea>
-
-              <div className={`status${error ? ' error' : ' ok'}`}>
-                {error ? error : (document && 'All good!')}
-              </div>
-
-              <button
-                type="submit"
-                disabled={!!error}
-                className="modal submit"
-              >
-                {isNew ? 'Add' : 'Update'}
-              </button>
-
-            </form>
-          </div>
-        </div>
-      </div>
+        </form>
+      </Modal>
     );
   }
 };

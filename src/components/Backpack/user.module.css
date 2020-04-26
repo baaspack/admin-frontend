@@ -1,0 +1,45 @@
+.delete div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.delete button {
+  font-size: 0;
+  position: relative;
+}
+
+.delete button::before {
+  background: #2d2d2e;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 5px;
+  position: absolute;
+  transform: rotate(45deg);
+  width: 21px;
+}
+
+.delete button::after {
+  background: #2d2d2e;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 5px;
+  position: absolute;
+  transform: rotate(-45deg);
+  width: 20px;
+}
+
+.delete button span {
+  color: #777777;
+  cursor: pointer;
+  display: block;
+  height: 15px;
+  left: 0;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  width: 15px;
+}

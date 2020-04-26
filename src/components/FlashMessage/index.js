@@ -14,7 +14,7 @@ const FlashMessage = ({ flash, clearFlash }) => {
       <div className={type === 'error' ? 'flash error' : 'flash' }>
         <p className="flash-text">{message.toString()}</p>
         <button
-          className="flash-remove"
+          className="close"
           onClick={clearFlash}
         >
           &times;

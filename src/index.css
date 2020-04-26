@@ -20,22 +20,41 @@
 
 html {
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
+/* render anti-aliased as much as possible based on browsers compatibility */
+* {
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
 body {
   font-family: var(--font-family-content);
-  max-width: 800px;
-  margin: 0 auto;
   padding-bottom: 40px;
+}
+
+body.lock-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+.App {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-header);
+}
+
+h1 {
+  color: var(--color-claret);
 }
 
 a, a:link, a:visited, a:hover, a:active {
@@ -48,15 +67,15 @@ a:hover {
 }
 
 button {
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  border: none;
+  border-radius: 3px;
   background: none;
-  padding: 5px 10px;
+  font-size: 1rem;
+  padding: 10px 17px;
 }
 
 button:hover {
   cursor: pointer;
-  background: var(--color-primary);
 }
 
 button[disabled] {
@@ -102,31 +121,76 @@ code {
   font-family: var(--font-family-code);
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .flash {
+  align-items: center;
   display: flex;
   background-color: var(--color-success);
-  border: 1px solid lightgray;
+  border: none;
   border-radius: 5px;
+  color: white;
   justify-content: space-between;
+  max-width: calc(100vw - 20px);
   padding: 5px 15px;
-  margin-bottom: 20px;
+  position: fixed;
+  top: 20px;
+  width: 1000px;
+  z-index: 3;
 }
 
 .flash.error {
   background-color: var(--color-danger);
 }
 
-.flash-remove {
-  border: 0;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
+.flash .close {
+  background: transparent;
+  cursor: pointer;
+  font-size: 0;
+  height: 15px;
+  padding: 15px;
+  position: relative;
+  width: 15px;
 }
 
-.flash-remove:hover {
-  background-color: var(--color-puerto-rico);
+.flash .close::before {
+  background: white;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 5px;
+  position: absolute;
+  top: 15px;
+  transform: rotate(45deg);
+  width: 21px;
+}
+
+.flash .close::after {
+  background: white;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 5px;
+  position: absolute;
+  top: 15px;
+  transform: rotate(-45deg);
+  width: 20px;
+}
+
+.flash .close span {
+  color: #777777;
+  cursor: pointer;
+  display: block;
+  height: 15px;
+  left: 0;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  width: 15px;
 }
 
 .vertical-form-control {
@@ -135,14 +199,17 @@ code {
   margin-top: 10px;
 }
 
-.backpack-dashboard {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+.vertical-form-control input[type="text"],
+.vertical-form-control input[type="password"],
+.vertical-form-control input[type="email"] {
+  border: 1px solid #81809e;
+  border-radius: 3px;
+  font-size: 1rem;
+  padding: 10px 15px;
 }
 
-.backpack-dashboard > * + * {
-  margin-top: 10px;
+.vertical-form-control label {
+  margin-bottom: 4px;
 }
 
 .table {
@@ -158,12 +225,6 @@ code {
   padding: 4px;
 }
 
-.form-add-backpack {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-}
-
 .terminal {
   display: flex;
   flex-flow: column nowrap;
@@ -171,6 +232,8 @@ code {
   background: black;
   color: greenyellow;
   padding: 0 10px;
+  margin-bottom: 20px;
+  overflow-x: auto
 }
 
 .terminal-remove {
@@ -184,20 +247,6 @@ code {
 
 .terminal-remove:hover {
   color: var(--color-danger);
-}
-
-.collection {
-  width: 70%;
-  margin-bottom: 3em;
-}
-
-.collection ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.collection-add {
-  width: 100%;
 }
 
 .doc {
@@ -215,6 +264,7 @@ code {
 }
 
 .doc-header {
+  align-items: center;
   border-bottom: 1px solid gray;
   display: flex;
   padding: 5px;
@@ -224,6 +274,10 @@ code {
 .doc .property {
   display: flex;
   padding-left: 10px;
+}
+
+.doc .properties {
+  padding-bottom: 10px;
 }
 
 .doc .prop-name {
@@ -240,101 +294,18 @@ code {
   margin-left: auto;
 }
 
-.add-user-form {
-  border: 1px solid lightgray;
-  border-radius: 5px;
-
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: stretch;
-  align-items: flex-end;
-
-  padding: 10px;
-}
-
-.add-user-form > * {
-  flex: 1;
-}
-
-.add-user-form > * + * {
-  margin-left: 20px;
-}
-
 .horizontal-form-control * {
   width: 100%;
 }
 
-.add-user-form input,
-.add-user-form button {
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.user + .user {
-  margin-top: 10px;
-}
-
-.user button {
-  margin-left: 5px;
-  visibility: hidden;
-}
-
 .doc-header:hover > .remove,
-.property:hover > .remove,
-.user:hover > button {
+.property:hover > .remove {
   visibility: visible;
   background-color: inherit;
 }
 
-.user button.edit:hover {
-  background-color: lavender;
-}
-
-.user button.delete:hover {
-  background-color: var(--color-danger);
-}
-
 .doc.danger, .doc .property.editable.danger {
   background-color: var(--color-danger);
-}
-
-.modal-background {
-  background-color: rgba(0, 0, 0, 0.25);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.modal {
-  background-color: #fff;
-  border-radius: 5px;
-  min-width: 30%;
-  padding: 10px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.modal-close {
-  background: inherit;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-.modal-close:hover {
-  background: var(--color-danger);
 }
 
 .json-of-doc {
@@ -347,49 +318,6 @@ code {
   margin: 5px auto 0 auto;
 }
 
-.modal .status {
-  max-width: 350px;
-  margin: 5px 0 10px 0;
-}
-
-.status.ok {
-  color: var(--color-success);
-}
-
-.status.error {
-  color: var(--color-danger);
-}
-
-button.modal.submit {
-  margin-top: 5px;
-}
-
-button.modal.submit[disabled=false]:hover {
-  background-color: darkgreen;
-}
-
-.add-collection-form {
-  width: 70%;
-  margin-bottom: 2em;
-}
-
-.input-add-on {
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  display: flex;
-}
-
-.input-add-on input {
-  border: none;
-  flex: 1;
-  margin: 5px;
-}
-
-.input-add-on button {
-  border-radius: 0;
-  border: none;
-}
-
 .toggle-show {
   cursor: pointer;
 }
@@ -397,18 +325,16 @@ button.modal.submit[disabled=false]:hover {
 .upload-instructions {
   background: var(--color-success);
   padding: 20px;
+  color: white;
   border: none;
   border-radius: 5px;
 }
 
+.upload-instructions a {
+  color: white;
+  text-decoration: underline;
+}
+
 .nav-logo {
-  max-width: 100px;
-}
-
-.zip-upload {
-  margin-top: 15px;
-}
-
-.zip-upload-form, .users {
-  margin-bottom: 4em;
+  max-width: 130px;
 }

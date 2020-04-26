@@ -16,6 +16,7 @@ export const terminalReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentBackpackName: '',
+        messages: {},
       }
     case terminalConstants.RECEIVE_MESSAGE:
       const { backpackName, message } = payload;

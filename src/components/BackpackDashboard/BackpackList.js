@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { backpacksActions } from '../../_actions/';
 
+import styles from './styles.module.css';
+
 class BackpackList extends Component {
   componentDidMount() {
     const { getAll } = this.props;
@@ -11,37 +13,51 @@ class BackpackList extends Component {
     getAll();
   };
 
+  handleRemoveFactory(backpackId) {
+    const { remove } = this.props;
+    const message = "You are about to delete your backpack, which cannot be undone. Are you sure?"
+
+    return function handleRemove() {
+      if (window.confirm(message)) {
+        remove(backpackId);
+      }
+    }
+  }
+
   render() {
-    const { backpacks, remove } = this.props;
+    const { backpacks } = this.props;
+    const classes = `${styles.backpackList} ${backpacks.length === 0 ? styles.backpackListNoItems : ''}`
 
     return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>API Key</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {backpacks.map((backpack) => (
-            <tr key={backpack.id}>
-              <td>
-                <Link to={`/backpacks/${backpack.name}`} >{backpack.name}</Link>
-              </td>
-              <td>{backpack.api_key}</td>
-              <td>
-                <button
-                  type="button"
-                  onClick={() => remove(backpack.id)}
-                >
-                  Delete
-                </button>
-              </td>
+      <section className={classes}>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>API Key</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {backpacks.map((backpack) => (
+              <tr key={backpack.id}>
+                <td>
+                  <Link to={`/backpacks/${backpack.name}`} >{backpack.name}</Link>
+                </td>
+                <td>{backpack.api_key}</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={this.handleRemoveFactory(backpack.id)}
+                  >
+                    delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
     );
   };
 };

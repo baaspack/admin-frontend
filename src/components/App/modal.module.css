@@ -1,0 +1,83 @@
+.close {
+  background: transparent;
+  cursor: pointer;
+  font-size: 0;
+  height: 15px;
+  padding: 15px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 15px;
+}
+
+.close::before {
+  background: #2d2d2e;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 5px;
+  position: absolute;
+  top: 15px;
+  transform: rotate(45deg);
+  width: 21px;
+}
+
+.close::after {
+  background: #2d2d2e;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 5px;
+  position: absolute;
+  top: 15px;
+  transform: rotate(-45deg);
+  width: 20px;
+}
+
+.close span {
+  color: #777777;
+  cursor: pointer;
+  display: block;
+  height: 15px;
+  left: 0;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  width: 15px;
+}
+
+.container {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 3;
+}
+
+.content {
+  margin: 0 60px 40px 60px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.modal {
+  background: #f0f1f3;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+  min-height: 300px;
+  max-height: calc(100vh -  100px);
+  max-width: 650px;
+  position: relative;
+  width: 80vw;
+}
+
+.modal h1 {
+  font-size: 2rem;
+  margin-bottom: 0;
+  text-align: center;
+}
