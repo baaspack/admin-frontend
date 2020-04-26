@@ -9,6 +9,7 @@ import LoginForm from '../LoginForm';
 import FlashMessage from '../FlashMessage';
 import BackpackDashboard from '../BackpackDashboard';
 import Backpack from '../Backpack';
+import { LandingPad } from './Portal';
 
 class App extends Component {
   componentDidMount() {
@@ -32,8 +33,8 @@ class App extends Component {
       return <p>Loading...</p>;
     }
 
-    return (
-      <div className="App">
+    return [
+      <div key="app" className="App">
         <Header />
 
         <FlashMessage />
@@ -52,8 +53,10 @@ class App extends Component {
             <p>Welcome</p>
           </Route>
         </Switch>
-      </div>
-    );
+
+      </div>,
+      <LandingPad key="landing-pad" />
+    ];
   };
 };
 

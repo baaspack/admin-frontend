@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { backpackUserActions } from '../../_actions';
 
+import styles from './user_form.module.css';
+
 class AddUserForm extends Component {
   state = {
     email: '',
@@ -20,11 +22,10 @@ class AddUserForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { addUser, toggleShowUser } = this.props;
+    const { addUser } = this.props;
     const { email, password } = this.state;
 
     addUser(email, password);
-    toggleShowUser();
 
     this.setState({
       email: '',
@@ -37,33 +38,32 @@ class AddUserForm extends Component {
 
     return (
       <form
-        className="add-user-form"
+        className={styles.form}
         action=""
         onSubmit={this.handleSubmit}
       >
-        <div className="horizontal-form-control">
+        <div>
           <label htmlFor="email">Email</label>
           <input type="email" name="email" id="email"
             value={email}
             onChange={this.handleInputChange}
-            autoFocus
+            placeholder='Email'
             required
           />
         </div>
 
-        <div className="horizontal-form-control">
+        <div>
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password"
             minLength="3"
             value={password}
             onChange={this.handleInputChange}
+            placeholder='Password'
             required
           />
         </div>
 
-        <button type="submit">
-          Add User
-        </button>
+        <button type="submit">add</button>
       </form>
     );
   };

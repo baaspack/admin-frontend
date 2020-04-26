@@ -1,0 +1,25 @@
+.header {
+  margin-bottom: 0;
+}
+
+.contentSection {
+  background: #f0f1f3;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.contentSectionWithUsers {
+  background: #f0f1f3;
+  border-radius: 10px;
+  padding-bottom: 5px;
+}
+
+.usersTable {
+  border-top: 1px solid #8685a1;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.usersTable td {
+  padding: 20px 5px;
+}

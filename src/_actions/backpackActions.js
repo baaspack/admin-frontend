@@ -16,7 +16,10 @@ const get = (backpackName) => {
       .send('GET', `backpacks/${backpackName}`)
       .then(({ message, backpack }) => {
         dispatch(success(backpack));
-        dispatch(flashActions.success(message));
+
+        if (message && message.length) {
+          dispatch(flashActions.success(message));
+        }
       })
       .catch((err) => {
         dispatch(failure());

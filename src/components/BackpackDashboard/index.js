@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import AddButton from './AddButton';
 import BackpackList from './BackpackList';
-import BackpackAddFormToggle from './AddFormToggle';
+import Header from './Header';
 import Terminal from '../Terminal';
 
 import { wsActions } from '../../_actions'
@@ -17,10 +18,11 @@ class BackpackDashboard extends Component {
 
   render() {
     return (
-      <div className="backpack-dashboard">
+      <div>
+        <Header />
         <Terminal />
+        <AddButton />
         <BackpackList />
-        <BackpackAddFormToggle />
       </div>
     )
   }

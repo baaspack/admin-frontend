@@ -1,0 +1,93 @@
+.addButton {
+  background: var(--color-claret);
+  color: white;
+  float: right;
+}
+
+.backpackList {
+  background: #f0f1f3;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 40px 20px 0 20px;
+}
+
+.backpackListNoItems {
+  padding-bottom: 40px;
+}
+
+.backpackList button {
+  background: #a4a9ac;
+  color: white;
+  padding: 3px 8px;
+}
+
+.backpackList button:hover, .backpackList button:focus {
+  background: var(--color-claret);
+}
+
+.backpackList table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.backpackList td {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.backpackList th {
+  border-bottom: 1px solid #8b88a3;
+  padding-bottom: 5px;
+  width: 33.3%;
+}
+
+.backpackList th:first-of-type, .backpackList td:first-of-type {
+  text-align: left;
+}
+
+.backpackList td:first-of-type {
+  font-weight: bold;
+}
+
+.backpackList th:nth-of-type(2), .backpackList td:nth-of-type(2)  {
+  text-align: center;
+}
+
+.backpackList th:nth-of-type(3), .backpackList td:nth-of-type(3)  {
+  text-align: right;
+}
+
+.backpackList tr {
+  width: 100%;
+}
+
+.backpackList tr:nth-of-type(1n+2) {
+  border-top: 1px solid white;
+}
+
+.createBackpack {
+  display: flex;
+  flex-direction: column;
+}
+
+.createBackpack button {
+  background: var(--color-claret);
+  color: white;
+  margin-top: auto;
+}
+
+.createBackpack input {
+  margin-bottom: 10px;
+}
+
+.createError {
+  color: var(--color-claret);
+  margin-top: 0;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.header {
+  border-bottom: 1px solid #8c89a5;
+  margin-bottom: 1em;
+}

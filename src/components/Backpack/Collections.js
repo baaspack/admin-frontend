@@ -6,6 +6,8 @@ import { collectionsActions } from '../../_actions';
 import AddCollectionForm from './AddCollectionForm';
 import Collection from './Collection';
 
+import styles from './collections.module.css';
+
 function Collections ({
   backpack,
   collections,
@@ -16,19 +18,21 @@ function Collections ({
 
   return (
     <Fragment>
-      <h2>Collections</h2>
+      <h2 className={styles.header}>collections</h2>
       <AddCollectionForm onSubmit={addCollection}/>
 
-      {
-        collectionNames
-          .map((colName) => (
-            <Collection
-              key={`${backpack.name}-${colName}`}
-              name={colName}
-              onToggleShowModal={toggleShowModal}
-            />
-        ))
-      }
+      <div className={styles.collections}>
+        {
+          collectionNames
+            .map((colName) => (
+              <Collection
+                key={`${backpack.name}-${colName}`}
+                name={colName}
+                onToggleShowModal={toggleShowModal}
+              />
+          ))
+        }
+      </div>
     </Fragment>
   );
 };

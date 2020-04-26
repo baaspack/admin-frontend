@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Modal from '../App/Modal';
+
+import styles from './styles.module.css';
 
 class BackpackAddForm extends Component {
   state = {
@@ -25,29 +28,36 @@ class BackpackAddForm extends Component {
 
   render() {
     const { name } = this.state;
+    const { error } = this.props;
 
     return (
-      <form
-        className="form-add-backpack"
-        action="/backpacks"
-        method="POST"
-        onSubmit={this.handleSubmit}
+      <Modal
+        onClose={this.props.onModalClose}
+        title="create a backpack"
       >
-        <div className="vertical-form-control">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={this.handleInputChange}
-            autoFocus
-          />
-        </div>
-        <div className="vertical-form-control">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+        <form
+          action="/backpacks"
+          className={styles.createBackpack}
+          method="POST"
+          onSubmit={this.handleSubmit}
+        >
+          <div className="vertical-form-control">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={this.handleInputChange}
+              autoFocus
+            />
+          </div>
+          {error && <p className={styles.createError}>{error}</p>}
+          <div className="vertical-form-control">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </Modal>
     );
   }
 };

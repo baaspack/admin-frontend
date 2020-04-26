@@ -1,26 +1,22 @@
 import React from 'react';
 
+import styles from './user.module.css';
+
 const User = ({ _id, email, onDeleteClick }) => {
   return (
-    <li className='user'>
-      <span>{email}</span>
-
-      {/* <button
-        type="button"
-        className="edit"
-        // onClick={this.handleDeleteClick}
-      >
-        Edit
-      </button> */}
-
-      <button
-        type="button"
-        className="delete"
-        onClick={() => onDeleteClick(_id)}
-      >
-        Delete
-      </button>
-    </li>
+    <tr>
+      <td>{email}</td>
+      <td className={styles.delete}>
+        <div>
+          <button
+            type="button"
+            onClick={() => onDeleteClick(_id)}
+          >
+            <span>delete</span>
+          </button>
+        </div>
+      </td>
+    </tr>
   )
 };
 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import Modal from '../App/Modal';
+
 import { userActions, flashActions } from '../../_actions';
 
 import styles from './styles.module.css';
