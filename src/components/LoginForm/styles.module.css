@@ -1,0 +1,31 @@
+.form {
+  background: #f0f1f3;
+  border-radius: 10px;
+  margin: 100px auto 0 auto;
+  max-width: 600px;
+  padding: 40px 70px 60px 70px;
+}
+
+.form button {
+  background: var(--color-claret);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 15px;
+  text-transform: uppercase;
+}
+
+.form h1 {
+  color: var(--color-claret);
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.form div:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+.separator {
+  border-top: 1px solid #8888a0;
+  margin: 40px 0;
+}

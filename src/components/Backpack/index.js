@@ -11,10 +11,12 @@ import {
 
 import { websocketConstants } from '../../_constants';
 
-import AddZipForm from './AddZipForm';
+import Host from './Host';
 import PropertyEditModal from './DocumentEditModal';
 import BackpackUsers from './Users';
 import Collections from './Collections';
+
+import styles from './index.module.css';
 
 class Backpack extends Component {
   state = {
@@ -84,7 +86,7 @@ class Backpack extends Component {
   }
 
   orphanUI = () => {
-    return <h1>Backpack: Loading...</h1>;
+    return <h1 className={styles.header}>backpack : Loading...</h1>;
   }
 
   loadingUI = () => {
@@ -92,7 +94,7 @@ class Backpack extends Component {
 
     return (
       <Fragment>
-        <h1>Backpack: {backpack.name}</h1>
+        <h1 className={styles.header}>backpack : {backpack.name}</h1>
         <p>{this.loadingMessage()}</p>
       </Fragment>
     )
@@ -115,9 +117,9 @@ class Backpack extends Component {
 
     return (
       <Fragment>
-        <h1>Backpack: {backpack.name}</h1>
+        <h1 className={styles.header}>backpack : {backpack.name}</h1>
 
-        <AddZipForm backpackName={backpack.name} />
+        <Host backpackName={backpack.name} />
         <BackpackUsers />
         <Collections toggleShowModal={this.toggleShowModal} />
       </Fragment>

@@ -5,22 +5,10 @@ import { backpackUserActions } from '../../_actions';
 import User from './User';
 import AddUserForm from './AddUserForm';
 
+import styles from './users.module.css';
+
 class Users extends Component {
-  state = {
-    showUsers: false,
-    showUser: false,
-  }
-
-  toggleStateProperty = (propName) => {
-    this.setState((prevState) => {
-      return {
-        [propName]: !prevState[propName],
-      }
-    });
-  };
-
   render() {
-    const { showUser, showUsers } = this.state;
     const { backpackUsers, deleteUser } = this.props;
 
     const users = backpackUsers.map((user) => (
@@ -30,34 +18,22 @@ class Users extends Component {
         email={user.email}
         onDeleteClick={deleteUser}
       />
-    ));
+  ));
 
     return (
       <div className="users">
-        <h2
-          className="toggle-show"
-          onClick={() => this.toggleStateProperty('showUsers')}
-        >
-          Users [{showUsers ? '-' : '+'}]
-        </h2>
-        {
-          showUsers &&
-          <div>
-            <ul>
-              {users}
-            </ul>
-            {
-              showUser ?
-              <AddUserForm toggleShowUser={() => this.toggleStateProperty('showUser') } /> :
-              <button
-                type="button"
-                onClick={() => this.toggleStateProperty('showUser')}
-              >
-                Add User
-              </button>
-            }
-          </div>
-        }
+        <h2 className={styles.header}>users</h2>
+
+        <div className={`${styles.contentSection} ${users.length ? styles.contentSectionWithUsers : ''}`}>
+          <AddUserForm />
+          {
+            users.length ? (
+              <table className={styles.usersTable}>
+                <tbody>{users}</tbody>
+              </table>
+            ) : null
+          }
+        </div>
       </div>
     );
   };

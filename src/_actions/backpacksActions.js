@@ -16,7 +16,10 @@ const getAll = () => {
       .send('GET', 'backpacks')
       .then(({ message, backpacks }) => {
         dispatch(success(backpacks));
-        dispatch(flashActions.success(message));
+
+        if (message && message.length) {
+          dispatch(flashActions.success(message));
+        }
       })
       .catch((err) => {
         dispatch(failure());
@@ -26,7 +29,7 @@ const getAll = () => {
   }
 };
 
-const add = (backpackName) => {
+const add = (backpackName, onFailure = (_msg) => {}) => {
   const request = () => makeAction(backpacksConstants.ADD_REQUEST);
   const success = (backpack) => makeAction(backpacksConstants.ADD_SUCCESS, { backpack });
   const failure = () => makeAction(backpacksConstants.ADD_FAILURE);
@@ -45,7 +48,7 @@ const add = (backpackName) => {
       })
       .catch((err) => {
         dispatch(failure());
-        dispatch(flashActions.error(err.message));
+        onFailure(err.message);
         throw err.message;
       });
   }

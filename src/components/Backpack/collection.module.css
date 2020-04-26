@@ -1,0 +1,29 @@
+.addDocument {
+  background: var(--color-claret);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.addDocument:first-child {
+  margin-top: 0;
+}
+
+.contentSection {
+  background: #f0f1f3;
+  border-radius: 10px;
+  margin-left: 3rem;
+  padding: 20px;
+}
+
+.header {
+  margin-bottom: 0;
+  margin-left: 3rem;
+}
+
+.collection ul {
+  list-style: none;
+  margin: 10px 0 0 0;
+  padding: 0
+}

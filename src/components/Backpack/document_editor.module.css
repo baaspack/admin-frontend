@@ -1,0 +1,25 @@
+.submit {
+  background: var(--color-claret);
+  color: white;
+  display: block;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.submit[disabled] {
+  opacity: 0.5;
+}
+
+.status {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.statusError {
+  color: var(--color-danger);
+}
+
+.statusOk {
+  color: var(--color-success);
+}

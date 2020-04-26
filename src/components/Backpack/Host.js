@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import apiClient from '../../lib/apiClient';
 import { flashActions } from '../../_actions';
 
+import styles from './host.module.css';
 
 class AddZipForm extends Component {
   state = {
@@ -44,34 +45,38 @@ class AddZipForm extends Component {
     const instructionsUrl = `https://${newHostname}/`;
 
     return (
-      <form
-        action=""
-        className="zip-upload-form"
-        onSubmit={this.handleSubmit}
-      >
-        <div>
-          <label htmlFor="file">Upload a .zip of your frontend files: </label>
-          <input
-            type="file"
-            name="file"
-            id="file"
-            accept=".zip"
-            onChange={this.handleFileUpload}
-            required
-          />
-        </div>
+      <section>
+        <h2 className={styles.header}>host</h2>
 
-        <button className='zip-upload' type="submit">Upload & Host!</button>
+        <form
+          action=""
+          className={styles.form}
+          onSubmit={this.handleSubmit}
+        >
+          <div className={styles.fileSection}>
+            <label htmlFor="file">Upload a .zip of your frontend files: </label>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              accept=".zip"
+              onChange={this.handleFileUpload}
+              required
+            />
+          </div>
 
-        {
-          this.state.displayInstructions &&
-            <p className="upload-instructions">
-              The uploaded content should be live at{' '}
-              <a href={instructionsUrl}>{instructionsUrl}</a>{' '}
-              in about 60 seconds.
-            </p>
-        }
-      </form>
+          <button className={styles.submit} type="submit">upload & host</button>
+
+          {
+            this.state.displayInstructions &&
+              <p className="upload-instructions">
+                The uploaded content should be live at{' '}
+                <a href={instructionsUrl}>{instructionsUrl}</a>{' '}
+                in about 60 seconds.
+              </p>
+          }
+        </form>
+      </section>
     )
   }
 };

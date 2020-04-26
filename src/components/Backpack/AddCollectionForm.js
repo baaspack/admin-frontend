@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import styles from './collection_form.module.css';
+
 class AddCollectionForm extends Component {
   state = {
     name: '',
@@ -37,10 +39,10 @@ class AddCollectionForm extends Component {
     return (
       <form
         action=""
-        className="add-collection-form"
+        className={styles.form}
         onSubmit={this.handleSubmit}
       >
-        <div className="input-add-on">
+        <div>
           <input
             type="text"
             name="name"
@@ -48,16 +50,23 @@ class AddCollectionForm extends Component {
             placeholder="Add new collection"
             onChange={this.handleInputChange}
           />
-          <button
-            type="submit"
-            disabled={!!error}
-          >
-            Add
-          </button>
         </div>
-        <small className="status error">
-          {error}
-        </small>
+        <button
+          type="submit"
+          disabled={!!error}
+        >
+          add
+        </button>
+
+        {
+          error ? (
+            <div>
+              <small className="status error">
+                {error}
+              </small>
+            </div>
+          ) : null
+        }
       </form>
     );
   };
